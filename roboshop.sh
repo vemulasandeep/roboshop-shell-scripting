@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-bash compenents/$1.sh
+bash Compenents/$1.sh
