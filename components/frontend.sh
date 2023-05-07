@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 echo Installing frontend component
