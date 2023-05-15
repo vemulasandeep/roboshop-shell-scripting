@@ -10,7 +10,7 @@ systemctl start mongod
 
 #then restart the service
 
-vim /etc/mongod.conf
+#vim /etc/mongod.conf
 
 
 systemctl restart mongod
