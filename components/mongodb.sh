@@ -10,6 +10,9 @@ systemctl start mongod
 
 #then restart the service
 
+vim /etc/mongod.conf
+
+
 systemctl restart mongod
 
 ## Every Database needs the schema to be loaded for the application to work.
