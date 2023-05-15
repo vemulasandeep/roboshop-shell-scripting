@@ -12,6 +12,7 @@ systemctl start mongod
 
 #vim /etc/mongod.conf
 
+sed -i -e 's/127.0.0.0/0.0.0.0/' /etc/mongod.conf
 
 systemctl restart mongod
 
