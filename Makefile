@@ -6,7 +6,7 @@ user:
 	@bash components/user.sh
 catalogue:
 	@bash components/catalogue.sh
-mogodb:
+mongodb:
 	@bash components/mongodb.sh
 redis:
 	@bash components/redis.sh
