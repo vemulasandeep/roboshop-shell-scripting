@@ -5,7 +5,7 @@ yum install nodejs -y
 useradd roboshop
 curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip"
 cd /home/roboshop
-rm -rf user
+rm -rf cart
 unzip /tmp/cart.zip
 mv cart-main cart
 cd cart
