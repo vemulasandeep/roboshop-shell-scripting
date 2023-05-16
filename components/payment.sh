@@ -10,4 +10,5 @@ cd /home/roboshop
 curl -L -s -o /tmp/payment.zip "https://github.com/roboshop-devops-project/payment/archive/main.zip"
 unzip /tmp/payment.zip
 mv payment-main payment
-
+cd /home/roboshop/payment
+pip3 install -r requirements.txt
