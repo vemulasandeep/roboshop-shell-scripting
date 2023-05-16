@@ -6,20 +6,9 @@ systemctl start mysqld
 MySQL_DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql --connect-expired-password -uroot -p"${MySQL_DEFAULT_PASSWORD}"
 echo "uninstall plugin validate_password;" | mysql -uroot -p"${MYSQL_PASSWORD}"
-#```
-#
-### **Setup Needed for Application.**
-#
-#As per the architecture diagram, MySQL is needed by
-#
-#- Shipping Service
-#
-#So we need to load that schema into the database, So those applications will detect them and run accordingly.
-#
-#To download schema, Use the following command
-#
-#```bash
-## curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-#```
-#
-#Load the schema for Services.
+
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
+cd /tmp
+unzip -o mysql.zip
+cd mysql-main
+mysql -u root -pRoboShop@1 <shipping.sql
