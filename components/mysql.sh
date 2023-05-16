@@ -5,7 +5,7 @@ systemctl enable mysqld
 systemctl start mysqld
 MySQL_DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql --connect-expired-password -uroot -p"${MySQL_DEFAULT_PASSWORD}"
-echo "uninstall plugin validate_password;" | mysql -uroot -p"${MySQL_PASSWORD}"
+echo "uninstall plugin validate_password;" |mysql -uroot -p"${MySQL_PASSWORD}"
 
 #```
 #
