@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ##### Change these values ###
 ZONE_ID="Z07395382F4PKRYJCDF3Z"
-SG_NAME="all"
+SG_NAME="All"
 #############################
 
 COMPONENT=all
