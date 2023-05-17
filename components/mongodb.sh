@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+if [ $USER_ID -ne 0 ]
+then
+  echo you are not a root user
+  echo You can run this script as root user or sudo
+  exit 1
+fi
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 yum install -y mongodb-org
 systemctl enable mongod

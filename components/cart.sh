@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+if [ $USER_ID -ne 0 ]
+then
+  echo you are not a root user
+  echo You can run this script as root user or sudo
+  exit 1
+fi
+
 curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
 yum install nodejs -y
 useradd roboshop
