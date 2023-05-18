@@ -2,7 +2,7 @@
 source components/common.sh
 CHECK_ROOT
 
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash &>>${LOG}
 if [ $? -ne 0 ]; then
    echo "setting up nodejs yum repo failed"
    exit 2
