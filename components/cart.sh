@@ -3,6 +3,10 @@ source components/common.sh
 CHECK_ROOT
 
 curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+if [ $? -ne 0 ] then
+   echo "setting up nodejs yum repo failed"
+   exit 2
+fi
 yum install nodejs -y
 useradd roboshop
 curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip"
