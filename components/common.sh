@@ -11,10 +11,10 @@ fi
 
 CHECK_STAT() {
 if [ $1 -ne 0 ]; then
-  echo -e "\e[31mFailed\e[0m"
+  echo -e "\e[31mFAILED\e[0m"
   exit 2
   else
-  echo -e "\e[32m Success\e[0m"
+  echo -e "\e[32m SUCCESS\e[0m"
   fi
 
 }
