@@ -4,7 +4,9 @@ CHECK_ROOT
    echo "setting up nodejs yum repo is"
 curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash &>>${LOG}
 CHECK_STAT $?
-yum install nodejs -y
+echo "Installing node js"
+yum install nodejs -y &>>&{LOG}
+CHECK_STAT $?
 useradd roboshop
 curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip"
 cd /home/roboshop
