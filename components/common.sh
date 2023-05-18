@@ -10,6 +10,7 @@ fi
 }
 
 CHECK_STAT() {
+echo --------------------------- >>${LOG}
 if [ $1 -ne 0 ]; then
   echo -e "\e[31mFAILED\e[0m"
   echo -e "\n check log file - ${LOG} for errors\n"
@@ -21,3 +22,8 @@ if [ $1 -ne 0 ]; then
 }
 LOG=/tmp/roboshop.log
 rm -rf $LOG
+
+PRINT() {
+echo ------------ $1 ------------ >>${LOG}
+echo "$1"
+}
