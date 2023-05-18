@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source components/common.sh
 CHECK_ROOT
 yum install golang -y
 useradd roboshop
