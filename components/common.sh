@@ -57,8 +57,8 @@ PRINT  "removing old content if any exist"
 rm -rf ${COMPONENT} &>>${LOG}
 CHECK_STAT $?
 
-PRINT "extracting the ${COMPONENT}content"
-unzip /tmp/${COMPONENT}.zip &>>{LOG}
+PRINT "Extract ${COMPONENT} Content"
+unzip /tmp/${COMPONENT}.zip &>>${LOG}
 CHECK_STAT $?
 
 mv ${COMPONENT}-main ${COMPONENT}
