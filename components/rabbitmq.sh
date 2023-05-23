@@ -23,9 +23,12 @@ PRINT "Start rabbitmq server"
 systemctl enable rabbitmq-server && systemctl start rabbitmq-server
 CHECK_STAT $?
 
-PRINT "create rabbitmq user"
-rabbitmqctl add_user roboshop $"{RABBITMQ_USER_PASSWORD}" &>>${LOG}
-CHECK_STAT $?
+rabbitmqctl list_users | grep roboshop
+if [ $? -ne 0 ]; then
+    PRINT "create rabbitmq user"
+    rabbitmqctl add_user roboshop $"{RABBITMQ_USER_PASSWORD}" &>>${LOG}
+    CHECK_STAT $?
+fi
 
 PRINT "Rabbitmq user tags and permissions"
 
