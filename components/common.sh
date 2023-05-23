@@ -83,7 +83,4 @@ systemctl enable ${COMPONENT}
 PRINT  "Start ${COMPONENT}service"
 systemctl restart ${COMPONENT}&>>$LOG}
 CHECK_STAT $?
-
-
-
 }
