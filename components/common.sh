@@ -82,4 +82,5 @@ systemctl start ${COMPONENT}
 CHECK_STAT $?
 PRINT "enable ${COMPONENT} "
 systemctl enable ${COMPONENT}
+CHECK_STAT $?
 }
