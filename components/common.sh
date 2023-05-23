@@ -57,8 +57,8 @@ PRINT  "removing old content if any exist"
 rm -rf cart &>>${LOG}
 CHECK_STAT $?
 
-PRINT "extracting the {COMPONENT} ZIP content"
-unzip /tmp/{COMPONENT}.zip &>>{LOG}
+PRINT "extracting the ${COMPONENT} ZIP content"
+unzip /tmp/${COMPONENT}.zip &>>{LOG}
 CHECK_STAT $?
 
 mv cart-main cart
