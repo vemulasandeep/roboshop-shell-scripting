@@ -77,4 +77,7 @@ mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.
 CHECK_STAT $?
 
 systemctl daemon-reload
+systemctl enable ${COMPONENT}
+PRINT " Start ${COMPONENT} service"
+systemctl restart${COMPONENT}
 }
