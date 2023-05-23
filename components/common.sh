@@ -80,6 +80,6 @@ systemctl daemon-reload
 PRINT "enable ${COMPONENT} "
 systemctl enable ${COMPONENT}
 PRINT " Start ${COMPONENT} service"
-systemctl restart ${COMPONENT}
+systemctl start ${COMPONENT}
 CHECK_STAT $?
 }
