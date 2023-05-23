@@ -34,3 +34,11 @@ if [ $? -eq 0 ]; then
   echo "uninstall plugin validate_password;" | mysql -uroot -p"${MYSQL_PASSWORD}" &>>${LOG}
   CHECK_STAT $?
 fi
+
+PRINT "Download Schema"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>${LOG}
+CHECK_STAT $?
+
+PRINT "Load Schema"
+cd /tmp && unzip -o mysql.zip &>>${LOG} && cd mysql-main && mysql -u root -p"${MYSQL_PASSWORD}" <shipping.sql &>>${LOG}
+CHECK_STAT $?
