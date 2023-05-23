@@ -106,7 +106,7 @@ CHECK_STAT $?
 
 PRINT "Organize ${COMPONENT} content"
 
-mv ${COMPONENT}-main/static/* . && mv static/* . && rm -rf ${COMPONENT}-main README.md && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
+mv ${COMPONENT}-main/* . && mv static/* . && rm -rf ${COMPONENT}-main README.md && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 CHECK_STAT $?
 
 PRINT "Update ${COMPONENT} configuration"
