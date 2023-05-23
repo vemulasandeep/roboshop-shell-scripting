@@ -54,7 +54,7 @@ CHECK_STAT $?
 cd /home/roboshop
 
 PRINT  "removing old content if any exist"
-rm -rf cart &>>${LOG}
+rm -rf ${COMPONENT} &>>${LOG}
 CHECK_STAT $?
 
 PRINT "extracting the ${COMPONENT} ZIP content"
@@ -69,11 +69,11 @@ npm install &>>${LOG}
 CHECK_STAT $?
 
 PRINT  "Update SystemD configuration"
-sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/cart/systemd.service &>>${LOG}
+sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service &>>${LOG}
 CHECK_STAT $?
 
 PRINT  "setup SystemD configurations"
-mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>${LOG}
+mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG}
 CHECK_STAT $?
 
 systemctl daemon-reload
