@@ -28,7 +28,7 @@ echo ------------ $1 ------------ >>${LOG}
 echo "$1"
 }
 
-NODEJS {
+NODEJS() {
 CHECK_ROOT
 
   PRINT "setting up nodejs yum repo is"
