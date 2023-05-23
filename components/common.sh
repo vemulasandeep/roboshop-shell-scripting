@@ -84,3 +84,38 @@ PRINT "enable ${COMPONENT} "
 systemctl enable ${COMPONENT}
 CHECK_STAT $?
 }
+
+NGINX() {
+
+CHECK_ROOT
+PRINT "Installing Nginx"
+yum install nginx -y &>>${LOG}
+CHECK_STAT $?
+PRINT "Download ${COMPONENT} content"
+curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
+CHECK_STAT $?
+
+PRINT "Clean old contenct"
+cd /usr/share/nginx/html
+rm -rf * &>>${LOG}
+CHECK_STAT $?
+
+PRINT "extract${COMPONENT} content"
+unzip /tmp/${COMPONENT}.zip
+CHECK_STAT $?
+
+PRINT "Organize ${COMPONENT} content"
+
+mv ${COMPONENT}-main/static/* . && mv static/* . && rm -rf ${COMPONENT}-main README.md && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
+CHECK_STAT $?
+
+PRINT "Update ${COMPONENT} configuration"
+
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/user/ s/localhost/user.roboshop.internal/' -e '/cart/ s/localhost/cart.roboshop.internal/' -e '/shipping/ s/localhost/shipping.roboshop.internal/' -e '/payment/ s/localhost/payment.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
+CHECK_STAT $?
+
+PRINT "Start Nginx Service"
+
+systemctl enable nginx &>>${LOG} && systemctl restart nginx &>>${LOG}
+
+}
