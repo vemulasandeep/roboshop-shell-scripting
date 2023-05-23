@@ -29,7 +29,6 @@ echo "$1"
 }
 
 NODEJS {
-source components/common.sh
 CHECK_ROOT
 
   PRINT "setting up nodejs yum repo is"
