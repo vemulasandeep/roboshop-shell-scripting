@@ -61,10 +61,10 @@ PRINT "extracting the ${COMPONENT} ZIP content"
 unzip /tmp/${COMPONENT}.zip &>>{LOG}
 CHECK_STAT $?
 
-mv cart-main cart
+mv ${COMPONENT}-main ${COMPONENT}
 cd cart
 
-PRINT  "Installing nodejs dependencies"
+PRINT  "Installing nodejs dependencies for ${COMPONENT}"
 npm install &>>${LOG}
 CHECK_STAT $?
 
