@@ -12,9 +12,10 @@ CHECK_STAT $?
 
 PRINT  "creating application user"
 id roboshop &>>${LOG}
-if [ $? -ne 0 ] then
+if [ $? -ne 0 ]
+then
     useradd roboshop &>>${LOG}
-    fi
+fi
 CHECK_STAT $?
 
 PRINT "downloading cart content"
