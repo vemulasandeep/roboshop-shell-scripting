@@ -144,7 +144,7 @@ PYTHON() {
 CHECK_ROOT
 
 PRINT "Install Python"
-yum install python36 gcc python3-devel -y
+yum install python36 gcc python3-devel -y &>>${LOG}
 CHECK_STAT $?
 
 APP_COMMON_SETUP
