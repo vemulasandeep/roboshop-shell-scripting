@@ -29,28 +29,26 @@ echo "$1"
 }
 
 APP_COMMON_SETUP() {
-
-PRINT  "creating application user"
-id roboshop &>>${LOG}
-if [ $? -ne 0 ]
-then
+  PRINT "Creating Application User"
+  id roboshop &>>${LOG}
+  if [ $? -ne 0 ]; then
     useradd roboshop &>>${LOG}
-fi
-CHECK_STAT $?
+  fi
+  CHECK_STAT $?
 
-PRINT "downloading ${COMPONENT} content"
-curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
-CHECK_STAT $?
+  PRINT "Downloading ${COMPONENT} Content"
+  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
+  CHECK_STAT $?
 
-cd /home/roboshop
+  cd /home/roboshop
 
-PRINT  "removing old content if any exist"
-rm -rf ${COMPONENT} &>>${LOG}
-CHECK_STAT $?
+  PRINT "Remove old Content"
+  rm -rf ${COMPONENT}  &>>${LOG}
+  CHECK_STAT $?
 
-PRINT "extracting the ${COMPONENT} ZIP content"
-unzip /tmp/${COMPONENT}.zip &>>${LOG}
-CHECK_STAT $?
+  PRINT "Extract ${COMPONENT} Content"
+  unzip /tmp/${COMPONENT}.zip &>>${LOG}
+  CHECK_STAT $?
 }
 
 SYSTEMD() {
