@@ -126,16 +126,17 @@ systemctl enable nginx &>>${LOG} && systemctl restart nginx &>>${LOG}
 }
 
 MAVEN() {
-CHECK_ROOT
+  CHECK_ROOT
 
-PRINT "Installing MAven"
-yum install maven -y &>>${LOG}
-CHECK_STAT $?
+  PRINT "Installing Maven"
+  yum install maven -y &>>${LOG}
+  CHECK_STAT $?
 
-APP_COMMON_SETUP
+  APP_COMMON_SETUP
 
-PRINT "Compile ${COMPONENT} code"
-mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && mvn clean package && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-CHECK_STAT $?
-SYSTEMD
+  PRINT "Compile ${COMPONENT} Code"
+  mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+  CHECK_STAT $?
+
+  SYSTEMD
 }
