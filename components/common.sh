@@ -136,7 +136,7 @@ CHECK_STAT $?
 APP_COMMON_SETUP
 
 PRINT "Compile ${COMPONENT} code"
-mv ${COMPONENT}-main ${COMPONENET} && cd ${COMPONENT} && mvn clean package && mv target/${COMPONENT}g-1.0.jar ${COMPONENT}.jar
+mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && mvn clean package && mv target/${COMPONENT}g-1.0.jar ${COMPONENT}.jar
 
 SYSTEMD
 }
