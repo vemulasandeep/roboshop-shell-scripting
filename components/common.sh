@@ -149,6 +149,8 @@ CHECK_STAT $?
 
 APP_COMMON_SETUP
 
+PRINT "Install ${COMPONENT} dependencies"
+
 mv ${COMPONENT}-main ${COMPONENT} && cd /home/roboshop/${COMPONENT} && pip3 install -r requirements.txt &>>${LOG}
 CHECK_STAT $?
 
