@@ -51,7 +51,6 @@ CHECK_STAT $?
 PRINT "extracting the ${COMPONENT} ZIP content"
 unzip /tmp/${COMPONENT}.zip &>>{LOG}
 CHECK_STAT $?
-
 }
 
 SYSTEMD() {
