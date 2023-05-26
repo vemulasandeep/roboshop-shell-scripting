@@ -28,16 +28,7 @@ echo ------------ $1 ------------ >>${LOG}
 echo "$1"
 }
 
-NODEJS() {
-CHECK_ROOT
-
-  PRINT "setting up nodejs yum repo is"
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash &>>${LOG}
-CHECK_STAT $?
-
-PRINT  "Installing node js"
-yum install nodejs -y &>>${LOG}
-CHECK_STAT $?
+APP_COMMON_SETUP() {
 
 PRINT  "creating application user"
 id roboshop &>>${LOG}
@@ -61,13 +52,9 @@ PRINT "extracting the ${COMPONENT} ZIP content"
 unzip /tmp/${COMPONENT}.zip &>>{LOG}
 CHECK_STAT $?
 
-mv ${COMPONENT}-main ${COMPONENT}
-cd cart
+}
 
-PRINT  "Installing nodejs dependencies for ${COMPONENT}"
-npm install &>>${LOG}
-CHECK_STAT $?
-
+SYSTEMD() {
 PRINT  "Update SystemD configuration"
 sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal'/  -e 's/MONGO_DNSNAME/mogodb.roboshop.internal'/ /home/roboshop/${COMPONENT}/systemd.service &>>${LOG}
 CHECK_STAT $?
@@ -78,11 +65,30 @@ CHECK_STAT $?
 
 systemctl daemon-reload
 PRINT " Start ${COMPONENT} service"
-systemctl start ${COMPONENT}
+systemctl enable ${COMPONENT}  && systemctl restart ${COMPONENT}
 CHECK_STAT $?
-PRINT "enable ${COMPONENT} "
-systemctl enable ${COMPONENT}
+}
+
+
+NODEJS() {
+CHECK_ROOT
+
+  PRINT "setting up nodejs yum repo is"
+curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash &>>${LOG}
 CHECK_STAT $?
+
+PRINT  "Installing node js"
+yum install nodejs -y &>>${LOG}
+CHECK_STAT $?
+
+APP_COMMON_SETUP
+
+PRINT  "Installing nodejs dependencies for ${COMPONENT}"
+mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && npm install &>>${LOG}
+CHECK_STAT $?
+
+SYSTEMD
+
 }
 
 NGINX() {
@@ -91,13 +97,13 @@ CHECK_ROOT
 PRINT "Installing Nginx"
 yum install nginx -y &>>${LOG}
 CHECK_STAT $?
+
 PRINT "Download ${COMPONENT} content"
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
 CHECK_STAT $?
 
 PRINT "Clean old contenct"
-cd /usr/share/nginx/html
-rm -rf * &>>${LOG}
+cd /usr/share/nginx/html && rm -rf * &>>${LOG}
 CHECK_STAT $?
 
 PRINT "extract${COMPONENT} content"
@@ -118,4 +124,19 @@ PRINT "Start Nginx Service"
 
 systemctl enable nginx &>>${LOG} && systemctl restart nginx &>>${LOG}
 
+}
+
+MAVEN() {
+CHECK_ROOT
+
+PRINT "Installing MAven"
+yum install maven -y &>>${LOG}
+CHECK_STAT $?
+
+APP_COMMON_SETUP
+
+PRINT "Compile ${COMPONENT} code"
+mv ${COMPONENT}-main ${COMPONENET} && cd ${COMPONENT} && mvn clean package && mv target/${COMPONENT}g-1.0.jar ${COMPONENT}.jar
+
+SYSTEMD
 }
