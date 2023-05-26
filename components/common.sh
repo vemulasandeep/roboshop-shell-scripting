@@ -49,7 +49,7 @@ rm -rf ${COMPONENT} &>>${LOG}
 CHECK_STAT $?
 
 PRINT "extracting the ${COMPONENT} ZIP content"
-unzip /tmp/${COMPONENT}.zip &>>{LOG}
+unzip /tmp/${COMPONENT}.zip &>>${LOG}
 CHECK_STAT $?
 }
 
