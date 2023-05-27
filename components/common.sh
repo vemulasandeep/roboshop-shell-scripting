@@ -62,7 +62,7 @@ CHECK_STAT $?
 
 systemctl daemon-reload
 PRINT " Start ${COMPONENT} service"
-systemctl enable ${COMPONENT}  && systemctl restart ${COMPONENT}
+systemctl enable ${COMPONENT} &>>${LOG} && systemctl restart ${COMPONENT}
 CHECK_STAT $?
 }
 
@@ -133,7 +133,7 @@ MAVEN() {
   APP_COMMON_SETUP
 
   PRINT "Compile ${COMPONENT} Code"
-   mv ${COMPONENT}-main ${COMPONENT} && cd ${COMPONENT} && mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+   mv ${COMPONENT}-main ${COMPONENT} &>>${LOG} && cd ${COMPONENT} && mvn clean package &>>${LOG} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
   CHECK_STAT $?
 
   SYSTEMD
