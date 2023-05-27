@@ -123,6 +123,7 @@ CHECK_STAT $?
 PRINT "Start Nginx Service"
 
 systemctl enable nginx &>>${LOG} && systemctl restart nginx &>>${LOG}
+CHECK_STAT $?
 
 }
 
