@@ -160,6 +160,7 @@ GROUP_ID=$(id -g roboshop)
 PRINT "Update ${COMPONENT} configuration"
 
 sed -i -e "/^uid/ c uid = ${USER_ID}" -e "/^gid/ c gid = ${GROUP_ID}" /home/roboshop/${COMPONENT}/${COMPONENT}.ini
+CHECK_STAT $?
 
 SYSTEMD
 }
