@@ -112,13 +112,15 @@ PRINT "Organize ${COMPONENT} content"
 mv ${COMPONENT}-main/* . && mv static/* . && rm -rf ${COMPONENT}-main README.md && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 CHECK_STAT $?
 
-for backend in catalogue cart user shipping payment ; do
+   for backend in catalogue cart user shipping payment ; do
 PRINT "Update configuration ${backend}"
-done
 
 #commented this as part of loop demo, However this single sed command is much better than loop
 #sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/user/ s/localhost/user.roboshop.internal/' -e '/cart/ s/localhost/cart.roboshop.internal/' -e '/shipping/ s/localhost/shipping.roboshop.internal/' -e '/payment/ s/localhost/payment.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
-CHECK_STAT $?
+
+       sed -i -e "/$backend s/localhost/$backend.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
+       CHECK_STAT $?
+        done
 
 PRINT "Start Nginx Service"
 
